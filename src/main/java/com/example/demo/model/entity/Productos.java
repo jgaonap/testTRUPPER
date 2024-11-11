@@ -1,5 +1,7 @@
 package com.example.demo.model.entity;
 
+import org.hibernate.annotations.Cascade;
+
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -17,12 +19,13 @@ public class Productos {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int producto_id;
 	@ManyToOne
+	@Cascade(org.hibernate.annotations.CascadeType.PERSIST)
 	@JoinColumn(name = "orden_id")
 	private Ordenes ordenes;
 	@Nonnull
 	private String codigo;
 	@Nonnull
-	private String decripcion;
+	private String descripcion;
 	@Nonnull
 	private double precio;
 
@@ -51,11 +54,11 @@ public class Productos {
 	}
 
 	public String getDecripcion() {
-		return decripcion;
+		return descripcion;
 	}
 
 	public void setDecripcion(String decripcion) {
-		this.decripcion = decripcion;
+		this.descripcion = decripcion;
 	}
 
 	public double getPrecio() {
@@ -69,7 +72,7 @@ public class Productos {
 	@Override
 	public String toString() {
 		return "Productos [producto_id=" + producto_id + ", ordenes=" + ordenes + ", codigo=" + codigo + ", decripcion="
-				+ decripcion + ", precio=" + precio + "]";
+				+ descripcion + ", precio=" + precio + "]";
 	}
 
 }

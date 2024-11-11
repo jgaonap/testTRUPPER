@@ -3,6 +3,7 @@ package com.example.demo.model.entity;
 import java.util.List;
 
 import jakarta.annotation.Nonnull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,8 +21,7 @@ public class Sucursales {
 	private int sucursal_id;
 	@Nonnull
 	private String nombre;
-
-	@OneToMany(mappedBy = "sucursales")
+	@OneToMany(mappedBy = "sucursales", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private List<Ordenes> ordenes;
 
 	public int getSucursal_id() {

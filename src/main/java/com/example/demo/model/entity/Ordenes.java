@@ -3,7 +3,10 @@ package com.example.demo.model.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import org.hibernate.annotations.Cascade;
+
 import jakarta.annotation.Nonnull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,13 +25,14 @@ public class Ordenes {
 	@Column(name = "orden_id")
 	private int orden_id;
 	@ManyToOne
+	@Cascade(org.hibernate.annotations.CascadeType.PERSIST)
 	@JoinColumn(name = "sucursal_id")
 	private Sucursales sucursales;
 	@Nonnull
 	private LocalDate fecha;
 	@Nonnull
 	private double total;
-	@OneToMany(mappedBy = "ordenes")
+	@OneToMany(mappedBy = "ordenes", cascade = CascadeType.PERSIST, orphanRemoval = true)
 	private List<Productos> productos;
 
 	public int getOrden_id() {
